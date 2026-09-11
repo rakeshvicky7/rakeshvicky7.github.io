@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rakesh Ranjan Vejendla — CV</title>
+<style>
+@page { size: A4; margin: 13mm 15mm 12mm 15mm; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body{
+  font-family:"Carlito","Calibri","Liberation Sans",sans-serif;
+  font-size:10pt; line-height:1.29; color:#1a1a1a; margin:0;
+}
+a{ color:#1a1a1a; text-decoration:none; }
+
+.name{
+  text-align:center; font-size:21pt; font-weight:700;
+  letter-spacing:2.2pt; text-transform:uppercase; margin:0 0 5pt;
+}
+.contact{ text-align:center; font-size:9.6pt; color:#333; margin:0; }
+.contact .sep{ padding:0 5pt; color:#9a9a9a; }
+
+h2{
+  font-size:10pt; font-weight:700; text-transform:uppercase; letter-spacing:1.6pt;
+  color:#1a1a1a; margin:10.5pt 0 4pt; padding-bottom:2.2pt;
+  border-bottom:1pt solid #1a1a1a;
+}
+
+.entry{ margin-bottom:6.5pt; }
+.entry:last-child{ margin-bottom:0; }
+.row{ display:flex; justify-content:space-between; align-items:baseline; gap:10pt; }
+.row .l{ font-weight:700; font-size:10.3pt; }
+.row .r{ white-space:nowrap; font-size:9.5pt; color:#444; }
+.sub{ font-size:9.6pt; color:#444; margin-top:.5pt; }
+
+ul{ margin:2.5pt 0 0; padding-left:12pt; list-style:none; }
+li{ position:relative; margin:0 0 2pt; }
+li::before{ content:"–"; position:absolute; left:-12pt; color:#777; }
+b{ font-weight:700; }
+
+.skills p{ margin:0 0 3pt; }
+.skills p:last-child{ margin-bottom:0; }
+.skills .k{ font-weight:700; }
+</style>
+</head>
+<body>
+
+<div class="name">Rakesh Ranjan Vejendla</div>
+<div class="contact">
+  Berlin, Germany<span class="sep">|</span>+49&nbsp;176&nbsp;70420771<span class="sep">|</span>rakeshvicky2000@gmail.com</div>
+<div class="contact"><a href="https://rakeshvicky7.github.io">rakeshvicky7.github.io</a><span class="sep">|</span><a href="https://www.linkedin.com/in/rakesh-ranjan-vejendla-0a8260237">linkedin.com/in/rakesh-ranjan-vejendla</a><span class="sep">|</span><a href="https://github.com/rakeshvicky7">github.com/rakeshvicky7</a>
+</div>
+
+<h2>Education</h2>
+
+<div class="entry">
+  <div class="row"><span class="l">IU International University of Applied Sciences</span><span class="r">Oct 2024 &ndash; Oct 2026</span></div>
+  <div class="sub">M.Sc. Computer Science &nbsp;&middot;&nbsp; Berlin, Germany</div>
+  <ul>
+    <li>Focus on machine learning, data engineering and software engineering; each module assessed by a delivered project.</li>
+    <li>Thesis, submitting October 2026: an AI assistant for structured fault diagnosis on modified industrial machinery.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="l">JNTUK University College of Engineering, Narasaraopet</span><span class="r">Aug 2018 &ndash; Sep 2022</span></div>
+  <div class="sub">B.Tech Mechanical Engineering &nbsp;&middot;&nbsp; Andhra Pradesh, India</div>
+</div>
+
+<h2>Projects</h2>
+
+<div class="entry">
+  <div class="row"><span class="l">Thyroid Disease Detection from Sleeping Heart Rate</span><span class="r">Python, LightGBM, scikit-learn</span></div>
+  <ul>
+    <li>Built a dataset of <b>5,568 cases from 175 patients</b> using the Garvan-UCI clinical archive, and engineered <b>8 features</b> from two sleeping heart-rate windows.</li>
+    <li>The gradient-boosted model reached <b>91.5% sensitivity, 83.8% specificity and AUC 0.939</b> under patient-grouped cross-validation.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="l">Scientific Image Forgery Detection</span><span class="r">Python, OpenCV, NumPy &middot; Kaggle</span></div>
+  <ul>
+    <li>Built a training-free pipeline (SIFT, g2NN matching, RANSAC, dense re-check) that finds copied regions in a research figure in <b>~1.5 seconds on CPU</b>.</li>
+    <li>Scored <b>0.375 mean overlap-F1 with zero false positives</b> on 60 authentic figures, against a 0.304 baseline that a deep-learning attempt had failed to beat.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="l">ElderAssist &mdash; Care Marketplace</span><span class="r">React, TypeScript, PostgreSQL, Supabase</span></div>
+  <ul>
+    <li>Built a two-sided marketplace with two user roles, a full task lifecycle, and live updates pushed over realtime subscriptions.</li>
+    <li>Enforced the access rules in the database: <b>row-level security on all six tables</b>, and a conditional update that keeps concurrent task acceptance safe.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="l">Grocery Sales Batch Data Pipeline</span><span class="r">PySpark, Airflow, PostgreSQL, Docker</span></div>
+  <ul>
+    <li>Built an <b>11-task Airflow pipeline</b> that loads <b>5M+ sales rows</b> into a queryable warehouse, is safe to run twice, and stays within a 3.7&nbsp;GB memory budget.</li>
+    <li>Measured every performance claim, including two that failed: a Spark cluster ran <b>3.5&times; slower</b> than local execution, and JDBC partitioning gave no gain.</li>
+  </ul>
+</div>
+
+<h2>Experience</h2>
+
+<div class="entry">
+  <div class="row"><span class="l">upGrad Education Private Limited</span><span class="r">Feb 2023 &ndash; Aug 2023</span></div>
+  <div class="sub">Admissions Counsellor, Study Abroad &nbsp;&middot;&nbsp; India</div>
+  <ul>
+    <li>Advised prospective students on international study programmes, explaining requirements, costs and timelines in plain terms.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row"><span class="l">Skill-Lync (EpowerX Learning Technologies)</span><span class="r">Nov 2022 &ndash; Feb 2023</span></div>
+  <div class="sub">Inside Sales Specialist &nbsp;&middot;&nbsp; India</div>
+  <ul>
+    <li>Matched candidates to technical course tracks at an engineering upskilling company, based on their background and career goals.</li>
+  </ul>
+</div>
+
+<h2>Skills</h2>
+<div class="skills">
+  <p><span class="k">Programming:</span> Python, SQL, TypeScript / JavaScript</p>
+  <p><span class="k">Machine learning &amp; data:</span> scikit-learn, LightGBM, PyTorch, pandas, NumPy, OpenCV</p>
+  <p><span class="k">Data engineering:</span> Apache Spark (PySpark), Apache Airflow, PostgreSQL, ETL pipeline design</p>
+  <p><span class="k">Web &amp; tools:</span> FastAPI, React, Docker, Git, GitHub Actions, Linux</p>
+  <p><span class="k">Languages:</span> English (B2), German (A2, B1 in progress), Telugu (native)</p>
+</div>
+
+</body>
+</html>
