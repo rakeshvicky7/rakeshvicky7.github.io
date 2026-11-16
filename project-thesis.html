@@ -836,70 +836,70 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
     <h2>3 · From a sentence to a part</h2>
     <p>
       The core of the system is not the language model. It is a symptom graph built the way an engineer
-      builds an <b>FMEA</b> — a failure mode and effects analysis — read out of the manual, the parts
-      list, the firmware configuration and the Klipper documentation.
+      builds an <b>FMEA</b> — a failure mode and effects analysis — out of the manual, the parts list,
+      the firmware configuration and the Klipper documentation.
     </p>
 
     <div class="scene">
       <div class="scene-stage">
         <svg class="dia" viewBox="0 0 728 300" role="img"
-             aria-label="A sentence from the technician is matched to observable symptoms, symptoms are linked by weighted probabilities to failure modes, failure modes are summed per part, and the top three parts come back with a check and repair steps.">
+             aria-label="A real run: the sentence about hotend temperature and an ADC out of range error is matched to two symptoms, those point to three failure modes with weights, the scores are summed per part, and the top part comes back with the measurement to make and the documents it came from.">
 
           <g data-show="0">
             <text class="s" x="8" y="20">what the technician types</text>
             <rect class="box" x="8" y="30" width="250" height="56" rx="3"/>
-            <text class="t" x="133" y="54" text-anchor="middle">&ldquo;first layer looks bad</text>
-            <text class="t" x="133" y="74" text-anchor="middle">and it rattles&rdquo;</text>
+            <text class="t" x="133" y="54" text-anchor="middle">&ldquo;hotend temperature jumps</text>
+            <text class="t" x="133" y="74" text-anchor="middle">around, ADC out of range&rdquo;</text>
           </g>
 
           <g data-show="1">
             <text class="s" x="290" y="20">symptoms it recognises</text>
-            <rect class="boxacc" x="290" y="30" width="180" height="26" rx="3"/>
-            <text class="t acctext" x="380" y="48" text-anchor="middle">poor first layer</text>
-            <rect class="boxacc" x="290" y="60" width="180" height="26" rx="3"/>
-            <text class="t acctext" x="380" y="78" text-anchor="middle">audible rattle</text>
+            <rect class="boxacc" x="290" y="30" width="190" height="26" rx="3"/>
+            <text class="t acctext" x="385" y="48" text-anchor="middle">ADC out of range</text>
+            <rect class="boxacc" x="290" y="60" width="190" height="26" rx="3"/>
+            <text class="t acctext" x="385" y="78" text-anchor="middle">temperature spikes</text>
             <path class="line accline draw" style="--len:40" d="M262 58 h24"/>
             <path class="acchead" d="m286 58-8-4v8z"/>
-            <text class="xs" x="290" y="104">625 everyday wordings map onto 106 symptoms</text>
+            <text class="xs" x="290" y="104">625 everyday wordings and the exact Klipper error strings</text>
           </g>
 
           <g data-show="2">
             <text class="s" x="8" y="150">failure modes the symptoms point to</text>
-            <rect class="box" x="8" y="160" width="200" height="30" rx="3"/>
-            <text class="t" x="108" y="180" text-anchor="middle">belt tension lost</text>
-            <rect class="box" x="8" y="196" width="200" height="30" rx="3"/>
-            <text class="t" x="108" y="216" text-anchor="middle">bed not level</text>
-            <rect class="box" x="8" y="232" width="200" height="30" rx="3"/>
-            <text class="t" x="108" y="252" text-anchor="middle">nozzle partly blocked</text>
-            <text class="xs" x="8" y="282">67 failure modes · 348 weighted links</text>
+            <rect class="box" x="8" y="160" width="232" height="30" rx="3"/>
+            <text class="t" x="124" y="180" text-anchor="middle">thermistor faulty &mdash; 0.37</text>
+            <rect class="box" x="8" y="196" width="232" height="30" rx="3"/>
+            <text class="t" x="124" y="216" text-anchor="middle">umbilical thermistor wire &mdash; 0.35</text>
+            <rect class="box" x="8" y="232" width="232" height="30" rx="3"/>
+            <text class="t" x="124" y="252" text-anchor="middle">bed thermistor faulty &mdash; 0.23</text>
+            <text class="xs" x="8" y="282">67 failure modes &middot; 348 weighted links</text>
           </g>
 
           <g data-show="3">
-            <path class="line draw" style="--len:60" d="M212 175 h46"/>
-            <path class="head" d="m258 175-8-4v8z"/>
-            <path class="line draw" style="--len:60" d="M212 211 h46"/>
-            <path class="head" d="m258 211-8-4v8z"/>
-            <path class="line draw" style="--len:60" d="M212 247 h46"/>
-            <path class="head" d="m258 247-8-4v8z"/>
-            <text class="s" x="266" y="150">scores summed per part</text>
-            <rect class="boxacc" x="266" y="160" width="190" height="30" rx="3"/>
-            <text class="t acctext" x="361" y="180" text-anchor="middle">A/B belt &mdash; 0.74</text>
-            <rect class="box" x="266" y="196" width="190" height="30" rx="3"/>
-            <text class="t" x="361" y="216" text-anchor="middle">bed carriage &mdash; 0.41</text>
-            <rect class="box" x="266" y="232" width="190" height="30" rx="3"/>
-            <text class="t" x="361" y="252" text-anchor="middle">hotend &mdash; 0.22</text>
-            <text class="xs" x="266" y="282">Bayesian scoring, soft evidence + leak term</text>
+            <path class="line draw" style="--len:40" d="M244 175 h26"/>
+            <path class="head" d="m270 175-8-4v8z"/>
+            <path class="line draw" style="--len:40" d="M244 211 h26"/>
+            <path class="head" d="m270 211-8-4v8z"/>
+            <path class="line draw" style="--len:40" d="M244 247 h26"/>
+            <path class="head" d="m270 247-8-4v8z"/>
+            <text class="s" x="278" y="150">scores summed per part</text>
+            <rect class="boxacc" x="278" y="160" width="190" height="30" rx="3"/>
+            <text class="t acctext" x="373" y="180" text-anchor="middle">hotend thermistor &mdash; 0.38</text>
+            <rect class="box" x="278" y="196" width="190" height="30" rx="3"/>
+            <text class="t" x="373" y="216" text-anchor="middle">umbilical wiring &mdash; 0.35</text>
+            <rect class="box" x="278" y="232" width="190" height="30" rx="3"/>
+            <text class="t" x="373" y="252" text-anchor="middle">bed thermistor &mdash; 0.23</text>
+            <text class="xs" x="278" y="282">Bayesian scoring, soft evidence + leak term</text>
           </g>
 
           <g data-show="4">
-            <path class="line accline draw" style="--len:50" d="M460 175 h36"/>
-            <path class="acchead" d="m496 175-8-4v8z"/>
-            <rect class="boxacc" x="504" y="150" width="216" height="112" rx="3"/>
-            <text class="t acctext" x="612" y="172" text-anchor="middle">check this first</text>
-            <text class="xs" x="612" y="194" text-anchor="middle">press the belt mid-span &mdash;</text>
-            <text class="xs" x="612" y="212" text-anchor="middle">it should sound a low note</text>
-            <text class="xs" x="612" y="236" text-anchor="middle">source: assembly manual, p. 48</text>
-            <text class="xs" x="612" y="254" text-anchor="middle">+ 257 numbered repair steps</text>
+            <path class="line accline draw" style="--len:40" d="M472 175 h26"/>
+            <path class="acchead" d="m498 175-8-4v8z"/>
+            <rect class="boxacc" x="506" y="146" width="214" height="120" rx="3"/>
+            <text class="t acctext" x="613" y="168" text-anchor="middle">check this first</text>
+            <text class="xs" x="613" y="190" text-anchor="middle">measure the thermistor &mdash; about</text>
+            <text class="xs" x="613" y="208" text-anchor="middle">100 k&#8486; at 25 &deg;C for Generic 3950</text>
+            <text class="xs" x="613" y="226" text-anchor="middle">and compare sensor_type with the part</text>
+            <text class="xs" x="613" y="250" text-anchor="middle">source: printer config + Klipper docs</text>
           </g>
         </svg>
       </div>
@@ -914,18 +914,18 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
       </div>
 
       <div class="scene-notes">
-        <p class="scene-note"><b>Free text, not a form.</b> People describe faults in their own words, so the reader matches keywords, word stems and phrases — and handles negation, so <em>the fan looks normal</em> is evidence against a fault, not for it.</p>
-        <p class="scene-note"><b>625 everyday wordings sit in front of 106 symptoms.</b> That layer is what lets someone write "rattles" and have the system understand the symptom an engineer would have called excess mechanical play.</p>
+        <p class="scene-note"><b>Free text, not a form.</b> People describe faults in their own words, so the reader matches keywords, word stems and phrases — and handles negation, so <em>the fan looks normal</em> is evidence against a fault, not for it. Exact Klipper error strings, like <em>ADC out of range</em>, are matched directly.</p>
+        <p class="scene-note"><b>625 everyday wordings sit in front of 106 symptoms.</b> That layer is what lets someone write "jumps around" and have the system record the symptom an engineer would have called an unstable temperature reading.</p>
         <p class="scene-note"><b>Each symptom is linked to the failure modes that can produce it</b>, with a weight for how strongly it points there. The weights are deliberately coarse — 0.9, 0.7, 0.5, 0.3 — because they are expert estimates, and pretending to more precision would be false.</p>
-        <p class="scene-note"><b>Scores are summed per part.</b> A part suspected by several failure modes at once rises above one suspected strongly by a single mode, which is how a human technician reasons about it too.</p>
-        <p class="scene-note"><b>Every answer carries its source.</b> The check and the repair steps come back with the document they were taken from, so the technician can verify the claim instead of trusting it.</p>
+        <p class="scene-note"><b>Scores are summed per part.</b> A part suspected by several failure modes at once rises above one suspected strongly by a single mode, which is how a human technician reasons about it too. This is a real run of the engine, not an illustration.</p>
+        <p class="scene-note"><b>Every answer carries its source.</b> Here the expected resistance comes from the printer's own configuration, which names the sensor type, and the error itself from the Klipper documentation — so the technician can verify the claim instead of trusting it.</p>
       </div>
     </div>
 
     <h3>What is actually in the graph</h3>
     <div class="tablewrap">
       <table class="res">
-        <caption>Built by hand from the machine's own documents. 56 of the 67 failure modes were confirmed against a source in an audit; all of it is exported to a single 13-sheet spreadsheet in the repository.</caption>
+        <caption>Settings, pins and parts were extracted from the documents by script. Failure modes, symptoms, probabilities and repair steps were drafted with AI assistance from those documents and then checked: 56 of the 67 failure modes were confirmed against a source in an audit. All of it is exported to a single 13-sheet spreadsheet in the repository.</caption>
         <thead>
           <tr><th>Item</th><th class="num">Count</th></tr>
         </thead>
@@ -952,13 +952,16 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
    <div class="panel">
     <h2>4 · Where the language model comes in</h2>
     <p>
-      The graph answers instantly and never hallucinates, but it reasons one part at a time. It cannot
-      notice that three failing parts share a single cable upstream. That is the job given to the model.
+      The graph answers instantly and cannot invent parts or facts that are not in it — though it can
+      still be wrong. What it cannot do is reason beyond one part at a time: it will not notice that three
+      failing parts share a single cable upstream. That is the job given to the model.
     </p>
     <p>
-      <b>Qwen 2.5 7B Instruct</b> runs locally through Ollama. It walks the part-dependency graph looking
-      for a common upstream cause behind the symptoms, and returns its own ranking of suspects, which is
-      fused with the graph's scores — its first, second and third choices carrying weights of 5, 3 and 2.
+      A <b>graph search</b> walks the part-dependency graph first, looking for a common upstream cause
+      behind the failing parts. <b>Qwen 2.5 7B Instruct</b>, running locally through Ollama, then chooses
+      its ranking from that evidence, and that ranking is fused with the graph's scores — its first,
+      second and third choices carrying weights of 5, 3 and 2. The walking is code; the judgement is the
+      model's.
     </p>
     <p>
       The order matters for the person using it: <b>the graph's answer appears immediately</b>, and the
@@ -1001,6 +1004,7 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
           <tr><td>B</td><td>Manual and docs as text, hybrid search</td><td class="num">29%</td><td class="num">62%</td></tr>
           <tr><td>BP</td><td>B plus config, parts list and slicer files</td><td class="num">29%</td><td class="num">60%</td></tr>
           <tr><td>C</td><td>Structured part model — functions, correct values, pins, links</td><td class="num">33%</td><td class="num">81%</td></tr>
+          <tr><td>C2</td><td>C with the part ids removed (robustness check)</td><td class="num">41%</td><td class="num">74%</td></tr>
           <tr><td>D</td><td>A generic third-party troubleshooting guide</td><td class="num">14%</td><td class="num">41%</td></tr>
           <tr><td>E</td><td>C plus D</td><td class="num">33%</td><td class="num">84%</td></tr>
           <tr><td>G</td><td>Graph RAG over the part-dependency graph</td><td class="num">33%</td><td class="num">86%</td></tr>
@@ -1011,8 +1015,13 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
     <p>
       <b>Structure beats text.</b> Handing the model the same knowledge as searchable documents (B) barely
       improved on giving it nothing at all (A). Turning that knowledge into a structured part model (C)
-      lifted the top-three rate from 59% to 81%. The result held across three different models — Qwen,
-      Llama 3.1 8B and Mistral 7B — so it is a property of the knowledge, not of one model.
+      lifted the top-three rate from 59% to 81%.
+    </p>
+    <p>
+      Across three models — Qwen, Llama 3.1 8B and Mistral 7B — structured knowledge beat document text in
+      the same direction every time, though that difference did not survive correction for multiple
+      comparisons. It beat the generic guide <b>significantly in all three</b>. The gain over giving the
+      model no knowledge at all was clear only for Qwen; Mistral did not improve.
     </p>
     <div class="callout">
       <p style="margin:0">
@@ -1036,7 +1045,7 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
       symptom graph. The final system was developed only on development cases and then run once against
       <b>69 held-out cases it had never seen</b>: 30 test cases, 9 real forum cases, and 30 newer real,
       solved forum cases collected after the system was finished — locked with SHA-256 checksums before
-      that single run, so the result could not be quietly tuned afterwards.
+      that single run, so the cases could not be changed after the system was finished.
     </p>
 
     <div class="tablewrap">
@@ -1062,7 +1071,7 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
     <p>
       <b>Yes — but only when the knowledge is structured.</b> The same documents handed to the same model
       as searchable text barely beat giving it nothing. Turned into a part model and then a symptom graph,
-      they took it from 59% to 91% in the top three. What generalises to the next machine is the method —
+      they took it from 59% in the top three for the bare model in phase one to 91% on the held-out cases (different case sets). What generalises to the next machine is the method —
       an FMEA-style graph read out of whatever documents exist, scored probabilistically, with a language
       model used only where graph reasoning runs out. What does not generalise is this graph: it was built
       by hand for one printer, and the next machine needs its own.
@@ -1078,18 +1087,22 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
    <div class="panel">
     <h2>7 · What did not work</h2>
     <p>
-      Three things were built, measured, and then switched off. They are reported here for the same reason
-      they are reported in the thesis: a result that only lists what worked is not an evaluation.
+      Three things were built and measured, and the measurements said not to rely on them. They are
+      reported here for the same reason they are reported in the thesis: a result that only lists what
+      worked is not an evaluation.
     </p>
     <ul>
       <li>
-        <b>Asking the technician follow-up questions made it worse.</b> Simulated yes/no questioning dropped
-        accuracy from 67% to 50%. A wrong answer early narrows the search in the wrong direction and the
-        system cannot recover.
+        <b>Asking follow-up questions made it worse in testing.</b> Yes/no questioning answered by a
+        simulated technician — Qwen standing in for the user — dropped accuracy from 67% to 50%. The likely
+        reason is that a wrong answer early narrows the search in the wrong direction and the system does
+        not recover. The questions remain available as an option rather than being removed, since a real
+        technician looking at the machine is not the same as a model guessing.
       </li>
       <li>
-        <b>Using the language model to read the symptoms was worse than keywords.</b> Having the model extract
-        symptoms into fixed fields scored 55%, against 63% for the plain keyword reader.
+        <b>Using the language model to read the symptoms was worse than keywords.</b> Having the model
+        extract symptoms into fixed fields scored 55% on the development set, against 63% for the plain
+        keyword reader.
       </li>
       <li>
         <b>A final round of tuning was thrown away.</b> It improved the development cases and hurt the held-out
