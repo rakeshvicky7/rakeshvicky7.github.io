@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Offline Repair Assistant for a 3D Printer — Rakesh Ranjan Vejendla</title>
-<meta name="description" content="M.Sc. thesis: an offline assistant that diagnoses faults on a DIY 3D printer from the machine's own documents — an FMEA symptom graph, Bayesian scoring and a local language model, evaluated on 69 held-out real cases.">
+<title>Diagnosing a Machine from Its Own Documents — M.Sc. thesis — Rakesh Ranjan Vejendla</title>
+<meta name="description" content="M.Sc. thesis: can an AI agent, given only a machine's own documents, take a fault described in plain words and lead a technician to the part at fault? A prototype built for a 3D printer put the faulty part in its top three for 91% of 69 held-out real cases.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -721,15 +721,16 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
     <a class="backlink" href="index.html#projects">
       <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>All projects
     </a>
-    <h1 style="font-size:clamp(1.9rem,4.6vw,2.6rem)">An Offline Repair Assistant for a DIY 3D Printer</h1>
-    <p class="kicker" style="margin-bottom:20px">M.Sc. thesis · knowledge graph, local LLM, Bayesian diagnosis, three.js</p>
+    <h1 style="font-size:clamp(1.9rem,4.6vw,2.6rem)">Can an AI Agent Diagnose a Machine from Its Own Documents?</h1>
+    <p class="kicker" style="margin-bottom:20px">M.Sc. thesis · knowledge graph, local LLM, Bayesian diagnosis · prototype on a 3D printer</p>
     <p class="lead">
-      A technician describes a problem in their own words. The assistant names the part most likely at
-      fault, says how to check it, shows that part highlighted on a 3D model of the machine, and gives
-      the repair steps. It runs entirely offline on a laptop, is grounded only in the machine's own
-      documents, and put the faulty part in its top three suggestions for
-      <strong>91% of 69 real cases it had never seen</strong>.
+      The thesis asks one question: given <strong>only the documents that come with a machine</strong>,
+      can an AI agent take a fault described in a technician's own words and lead them to the part that
+      is actually broken? To test it, I built a working prototype for one machine — a Voron 0.2 3D
+      printer — and measured it against real faults. It named the faulty part in its top three for
+      <strong>91% of 69 cases it had never seen</strong>, and it runs offline on a laptop.
     </p>
+
     <div class="linkrow" style="margin-top:22px">
       <a href="https://github.com/rakeshvicky7/voron-diagnostic-assistant-public" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="6" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 7.5v9"/><path d="M18 11.5c0 3-4 2.5-6 5"/></svg>View the repository
@@ -742,29 +743,47 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
 <section>
   <div class="wrap">
    <div class="panel">
-    <h2>1 · The problem</h2>
+    <h2>1 · The question</h2>
     <p>
-      The Voron 0.2 is a small open-source 3D printer that owners build themselves from a kit. Because
-      every machine is assembled by hand and then modified, no two are quite identical, and nobody holds
-      a record of how this particular one fails.
+      Factories rarely run a machine as it was sold. A base machine is modified, extended, or joined to
+      other units until it fits one production line. The parts are documented by the firms that made
+      them; <b>the modified whole is documented by nobody</b>, and no record exists of how it fails.
+      When it stops, diagnosis falls back on whichever technician remembers this machine, and the
+      sequence that fixed it last time is usually not written down.
     </p>
     <p>
-      When it goes wrong, what the owner can describe is vague — <em>the first layer looks bad</em>,
-      <em>it stops in the middle of a print</em> — while the cause may be mechanical, electrical, a
-      firmware setting or a slicer setting. The knowledge needed to tell those apart is scattered across
-      four documents: an assembly manual, a parts list, a firmware configuration file, and the Klipper
-      firmware documentation.
-    </p>
-    <p>
-      A general chatbot answers this confidently and often wrongly. It does not know this machine's
-      parts, its controller pins, or what the correct values are. The thesis asks a narrower question:
-      <strong>if an assistant is given only the machine's own documents, structured properly, can it
-      point a technician at the right part?</strong>
+      Formal methods for this exist and work — fault tree analysis, failure mode and effects analysis —
+      but they take time and training, so with a line stopped nobody uses them. A general chatbot, asked
+      instead, answers confidently and often wrongly: it does not know this machine's parts, its pins, or
+      what its correct values are.
     </p>
     <div class="callout">
       <p style="margin:0">
-        <b>The constraint was part of the question.</b> Free tools only, fully offline, running on an
-        ordinary Windows laptop — the situation a small workshop is actually in, rather than one with a
+        <b>The research question.</b> If an agent is given only the machine's own documents &mdash; and
+        that knowledge is structured rather than dumped in as text &mdash; can it take a symptom
+        described in everyday words and lead a technician to the part at fault, and to the check that
+        confirms it?
+      </p>
+    </div>
+
+    <h3>Why a 3D printer is the test machine</h3>
+    <p>
+      Answering that needs one machine where everything required is publicly available: complete
+      documents, a known parts list, firmware configuration — and, crucially, <b>a supply of real faults
+      with confirmed causes</b> to test against. The Voron 0.2, a small open-source printer that owners
+      build themselves from a kit, has all of it, including years of solved cases in public forums.
+    </p>
+    <p>
+      It also has the property that matters most here: every one is <b>hand-built and then modified</b>,
+      so no two are identical and no manufacturer holds a fault history — the same situation as the
+      modified factory machine, in a form one student can actually get at. Its knowledge is scattered
+      the same way too, across an assembly manual, a parts list, a firmware configuration file and the
+      Klipper firmware documentation.
+    </p>
+    <div class="callout">
+      <p style="margin:0">
+        <b>The constraint was part of the question.</b> Free tools only, fully offline, on an ordinary
+        Windows laptop &mdash; the situation a small workshop is actually in, rather than one with a
         cloud budget and a GPU.
       </p>
     </div>
@@ -776,7 +795,7 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
 <section>
   <div class="wrap">
    <div class="panel">
-    <h2>2 · What it does</h2>
+    <h2>2 · What the prototype does</h2>
     <p>
       A small Python server serves three pages. The printer's official CAD model is loaded into all of
       them, so the machine on screen is the machine in front of you.
@@ -1039,6 +1058,16 @@ table.res caption{caption-side:bottom;text-align:left;font-size:.78rem;color:var
       assistant names</b>. The earlier conversational assistant managed 23% first and 69% in the top three
       on the phase-one cases — a different case set, so the comparison is indicative rather than exact.
     </p>
+    <h3>The answer to the question</h3>
+    <p>
+      <b>Yes — but only when the knowledge is structured.</b> The same documents handed to the same model
+      as searchable text barely beat giving it nothing. Turned into a part model and then a symptom graph,
+      they took it from 59% to 91% in the top three. What generalises to the next machine is the method —
+      an FMEA-style graph read out of whatever documents exist, scored probabilistically, with a language
+      model used only where graph reasoning runs out. What does not generalise is this graph: it was built
+      by hand for one printer, and the next machine needs its own.
+    </p>
+
    </div>
   </div>
 </section>
